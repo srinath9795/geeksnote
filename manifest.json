@@ -3,7 +3,7 @@
 
   "name": "geeksNote",
   "options_page": "options/notes.html",
-  "description": "Take Quick Notes to view later",
+  "description": "Geeks way of taking notes.",
   "version": "1.0",
   "web_accessible_resources": ["options/notes.html"],
   "icons": {
