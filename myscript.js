@@ -16,11 +16,15 @@ window.onload = function(){
   {
     var secondary = document.getElementById('secondary');
     var notesInput = document.createElement('textarea');
-    var notesHeader = document.createElement('span');
+    var notesHeader = document.createElement('div');
     var title = document.createElement('h2');
+
+    notesHeader.style.paddingBottom = "5px";
+
     title.innerHTML = "geeksNote";
     title.className = "archive-title";
     title.style.display = "inline";
+    title.style.lineHeight = "0";
 
     var a = document.createElement('a');
     a.setAttribute('href',"chrome-extension://jcglgpokmhfaggmfmeodcgoedaikfpbb/options/notes.html");
