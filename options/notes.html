@@ -11,7 +11,7 @@
 	<table>
 		<tr ng-repeat="obj in notesObj">
 		  <td ng-repeat = "(key, value) in obj">
-		  	<div ng-if="value" style="background-color: #ffffcc;min-width:200px;max-width:300px;position:relative;height:100px;margin-right:50px;padding:10px">
+		  	<div ng-if="value" style="background-color: #ffffcc;min-width:200px;max-width:300px;position:relative;height:auto;min-height:100px;margin-right:50px;padding:10px">
 		  		{{value}}
 		  		<a ng-href="http://www.geeksforgeeks.org{{key}}" style="position:absolute;float:right;bottom:5px">Link</div>
 		  	</div>
