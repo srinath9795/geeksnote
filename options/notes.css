@@ -114,10 +114,10 @@ MEDIA QUERIES
 #sidebar {
 	background: #f0efef;
 }
-header, #content, #middle, #sidebar {
+#content, #middle, #sidebar {
 	margin-bottom: 5px;
 }
 
-#pagewrap, header, #content, #middle, #sidebar, footer {
+  #content, #middle, #sidebar {
 	border: solid 1px #ccc;
 }
