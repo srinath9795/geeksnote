@@ -4,7 +4,7 @@
   "name": "geeksNote",
   "options_page": "options/notes.html",
   "description": "Geeks way of taking notes.",
-  "version": "1.0",
+  "version": "1.0.2",
   "web_accessible_resources": ["options/notes.html"],
   "icons": {
       "19": "icons/notepad_19.png",

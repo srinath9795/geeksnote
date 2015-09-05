@@ -27,7 +27,8 @@ window.onload = function(){
     title.style.lineHeight = "0";
 
     var a = document.createElement('a');
-    a.setAttribute('href',"chrome-extension://jcglgpokmhfaggmfmeodcgoedaikfpbb/options/notes.html");
+    // console.log(chrome.runtime.id);
+    a.setAttribute('href',"chrome-extension://"+chrome.runtime.id+"/options/notes.html");
     a.innerHTML = "All Notes";
     a.style.display = "inline";
     a.style.float = "right";
