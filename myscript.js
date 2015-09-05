@@ -16,6 +16,22 @@ window.onload = function(){
   {
     var secondary = document.getElementById('secondary');
     var notesInput = document.createElement('textarea');
+    var notesHeader = document.createElement('span');
+    var title = document.createElement('h2');
+    title.innerHTML = "geeksNote";
+    title.className = "archive-title";
+    title.style.display = "inline";
+
+    var a = document.createElement('a');
+    a.setAttribute('href',"chrome-extension://jcglgpokmhfaggmfmeodcgoedaikfpbb/options/notes.html");
+    a.innerHTML = "All Notes";
+    a.style.display = "inline";
+    a.style.float = "right";
+    a.style.paddingBottom = "0";
+    a.target = "_blank";
+    notesHeader.appendChild(title);
+    notesHeader.appendChild(a);
+
     notesInput.setAttribute("id","notes-box");
     if(subUrl in notesObj)
     {
@@ -55,11 +71,28 @@ window.onload = function(){
     var aside = document.createElement("aside");
     aside.setAttribute("id","text-notes");
     aside.className = "widget widget_text";
+    
+    aside.appendChild(notesHeader);
     aside.appendChild(notesInput);
 
 
 
     secondary.insertBefore(aside, secondary.firstChild);
+
+
+
+    // var header = document.getElementById('menu-top');
+    // var allNotesLink = document.createElement('li');
+    // allNotesLink.setAttribute("id","menu-item-notes");
+    // allNotesLink.className = "menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135017";
+
+    // var a = document.createElement('a');
+    // a.setAttribute('href',"chrome-extension://jcglgpokmhfaggmfmeodcgoedaikfpbb/options/notes.html");
+    // a.innerHTML = "All Notes";
+    // allNotesLink.appendChild(a);
+    // header.appendChild(allNotesLink);
+
+
     // secondary.appendChild(notesInput);
 
   } 

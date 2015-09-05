@@ -5,6 +5,7 @@
   "options_page": "options/notes.html",
   "description": "Take Quick Notes to view later",
   "version": "1.0",
+  "web_accessible_resources": ["options/notes.html"],
   "icons": {
       "19": "icons/notepad_19.png",
       "128":"icons/notepad_128.png",

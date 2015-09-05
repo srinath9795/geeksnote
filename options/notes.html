@@ -8,12 +8,13 @@
 
 <body ng-app="geeksNote" ng-controller="parentController" ng-init="notesInit()" style="background-color: #E9EAED">
 	<center>
+		<h1>geeksNote</h1>
 	<table>
 		<tr ng-repeat="obj in notesObj">
-		  <td ng-repeat = "(key, value) in obj">
+		  <td ng-repeat = "(key, value) in obj" style="padding-bottom: 15px">
 		  	<div ng-if="value" style="background-color: #ffffcc;min-width:200px;max-width:300px;position:relative;height:auto;min-height:100px;margin-right:50px;padding:10px">
-		  		{{value}}
-		  		<a ng-href="http://www.geeksforgeeks.org{{key}}" style="position:absolute;float:right;bottom:5px">Link</div>
+		  		<p>{{value}}</p>
+		  		<a ng-href="http://www.geeksforgeeks.org{{key}}" style="position:absolute;bottom:5px;font-size:12px;width:auto">{{key.substring(0,50)}}</a>
 		  	</div>
 		  </td>
 		</tr>
