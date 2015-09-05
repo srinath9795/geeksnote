@@ -28,6 +28,7 @@ window.onload = function(){
     notesInput.style.minHeight="150px"; 
     notesInput.style.fontSize="13px"; 
     notesInput.style.color="#606060"; 
+    notesInput.style.fontFamily="'Source Code Pro', Consolas,  Menlo, Courier, monospace !important"; 
     var t;
     notesInput.oninput = function() {
       notesInput.style.height = ""; 

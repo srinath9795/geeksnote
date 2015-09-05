@@ -2,12 +2,12 @@
   "manifest_version": 2,
 
   "name": "geeksNote",
-  "description": "Notes for GFG for every problem",
+  "description": "Take Quick Notes to view later",
   "version": "1.0",
   "icons": {
-      "19": "icons/flipblue19.png",
-      "128":"icons/flipblue128.png",
-     "38":"icons/flipblue38.png"
+      "19": "icons/notepad_19.png",
+      "128":"icons/notepad_128.png",
+     "38":"icons/notepad_38.png"
   },
   "permissions": [
         "storage"
@@ -26,9 +26,9 @@
       "page_action": {
           "default_title": "geeksNote",
           "default_icon": {
-              "19": "icons/flipblue19.png",
-              "38":"icons/flipblue38.png",
-              "128":"icons/flipblue128.png"
+              "19": "icons/notepad_19.png",
+              "38":"icons/notepad_38.png",
+              "128":"icons/notepad_128.png"
               
           }
       }
