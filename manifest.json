@@ -11,7 +11,8 @@
      "38":"icons/notepad_38.png"
   },
   "permissions": [
-        "storage"
+        "storage",
+        "tabs"
     ],
   "background": {
         "persistent": true,

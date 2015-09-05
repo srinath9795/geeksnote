@@ -8,8 +8,32 @@
 //     }
 // });
 
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-  if (~tab.url.indexOf('.flipkart.com')) {
-    chrome.pageAction.show(tabId);
-  }
-});
+// chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+//   console.log(tab.url);
+//   // if (tab.url.indexOf('.geeksforgeeks.org')) {
+//     chrome.pageAction.show(tab.id);
+//   // }
+// });
+
+
+
+// Called when the url of a tab changes.
+function checkForValidUrl(tabId, changeInfo, tab) {
+// If the tabs url starts with "http://specificsite.com"...
+console.log(tab.url);
+if (tab.url.indexOf('http://www.geeksforgeeks.org') == 0) {
+// ... show the page action.
+chrome.pageAction.show(tabId);
+}
+};
+
+// Listen for any changes to the URL of any tab.
+chrome.tabs.onUpdated.addListener(checkForValidUrl);
+
+
+// // Show page action icon in omnibar.
+// function showPageAction( tabId, changeInfo, tab ) {
+//     chrome.pageAction.show(tabId);
+// };
+// // Call the above function when the url of a tab changes.
+// chrome.tabs.onUpdated.addListener(showPageAction);
