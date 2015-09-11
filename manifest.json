@@ -21,7 +21,7 @@
     },
   "content_scripts": [
     {
-      "matches": ["http://www.geeksforgeeks.org/*","https://www.geeksforgeeks.org/*"],
+      "matches": ["http://codeforces.com//*","http://codeforces.com/*","http://www.geeksforgeeks.org/*","https://www.geeksforgeeks.org/*"],
       "run_at": "document_start",
       "js": ["jquery-1.11.1.min.js","myscript.js"]
     }

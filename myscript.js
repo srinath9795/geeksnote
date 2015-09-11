@@ -1,22 +1,57 @@
-window.onload = function(){
 
+
+
+window.onload = function(){
+  
   var notesObj = {};
+  var subUrl = "";
+  var page = "";
+  //   chrome.storage.sync.get(null, function(items) {
+  //     var allKeys = Object.keys(items);
+  //     console.log('shit',allKeys,items);
+  // });
+
+
+  // Add one more if, if you want to extend this to a new website
+  // also give that domain a new name
+  // doamins right now
+  // notes    --  geeksforgeeks.org
+  // notesCF  --  codeforces.com
   var mainUrl = window.location.href ;
-  var subUrl = mainUrl.split("www.geeksforgeeks.org")[1];
-  chrome.storage.sync.get("notes", function (obj) {
-    notesObj=obj.notes;
+  if(mainUrl.indexOf("www.geeksforgeeks.org") > -1)
+  {
+    subUrl = mainUrl.split("www.geeksforgeeks.org")[1];
+    page = "notes";
+    
+  }
+  else if(mainUrl.indexOf("codeforces.com/problemset/problem/") > -1)
+  {
+    subUrl = mainUrl.split("codeforces.com/problemset/problem/")[1];
+    page = "notesCF"
+
+  }
+
+
+  chrome.storage.sync.get(page, function (obj) {
+    notesObj=obj[page];
     
     if (typeof notesObj==='undefined') {  // This occurs when the extension is first used as nothing would be stored 
         notesObj={};
     };
-    addNotesDiv();
+    addNotesDiv(page);
 
   });
-  var addNotesDiv = function()
+
+
+
+
+  var addNotesDiv = function(page)
   {
-    var secondary = document.getElementById('secondary');
-    var notesInput = document.createElement('textarea');
+    
+    
+    // asid > ( (notesHeader > (Title+a) ) + notesInput)
     var notesHeader = document.createElement('div');
+    var notesInput = document.createElement('textarea');
     var title = document.createElement('h2');
 
     notesHeader.style.paddingBottom = "5px";
@@ -44,7 +79,9 @@ window.onload = function(){
     }
     notesInput.type = "text";
     notesInput.style.resize="vertical"; 
-    notesInput.style.width="90%"; 
+    notesInput.style.width="100%"; 
+    notesInput.style.border="none"; 
+    notesInput.style.boxSizing="border-box"; 
     notesInput.style.backgroundColor="#ffffcc"; 
     notesInput.style.minHeight="150px"; 
     notesInput.style.fontSize="13px"; 
@@ -67,22 +104,32 @@ window.onload = function(){
     function syncNotes()
     {
         notesObj[subUrl] = document.getElementById('notes-box').value;
-        chrome.storage.sync.set({'notes': notesObj}, function() {
-            // console.log('saved');          
+        var objName = page;
+        var savingObj = {};
+        savingObj[objName] = notesObj;
+        chrome.storage.sync.set(savingObj, function() {
+            // console.log('saved',objName,notesObj);          
         }); 
         // console.log(subUrl);
     }
 
-    var aside = document.createElement("aside");
-    aside.setAttribute("id","text-notes");
-    aside.className = "widget widget_text";
+    var div = document.createElement("div");
+    div.setAttribute("id","text-notes");
+    if (page==="notesCF") {
+      div.className = "roundbox sidebox";
+    }
+    else
+      div.className = "widget widget_text";
     
-    aside.appendChild(notesHeader);
-    aside.appendChild(notesInput);
+    div.appendChild(notesHeader);
+    div.appendChild(notesInput);
 
-
-
-    secondary.insertBefore(aside, secondary.firstChild);
+    if (page==="notesCF") {
+      var secondary = document.getElementById('sidebar');
+    }
+    else
+      var secondary = document.getElementById('secondary');
+    secondary.insertBefore(div, secondary.firstChild);
 
 
 
@@ -100,5 +147,7 @@ window.onload = function(){
 
     // secondary.appendChild(notesInput);
 
-  } 
+  }
+
+
 }
