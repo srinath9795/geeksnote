@@ -15,5 +15,11 @@ It also helps you to write down a concise solution to the problem so that you ne
 You can browse through all the notes across different pages in a dedicated view for easy access.
 
 
+UPDATE :  geeksNote now works on codeforces.com also. 
+
+![alt tag](https://lh3.googleusercontent.com/9gEyCS-QhrhKGgYhgDg6mLvPHagQu45RI_D4Ro82GclP5zsEZii8MXTu9XwIPNgNg24hPvCYwQY=s640-h400-e365-rw)
+
 
 You can install this extension from [Chrome Web Store](https://chrome.google.com/webstore/detail/geeksnote/madmdfkpjojhbedohmenmgpedfdgbfio?hl=en).
+
+It would be great if you can pitch in to improve the design of the allNotes page which shows all the notes. Any other contributions are welcome too ☺
