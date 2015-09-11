@@ -2,10 +2,10 @@
   "manifest_version": 2,
 
   "name": "geeksNote",
-  "options_page": "options/notes.html",
+  "options_page": "notes/notes.html",
   "description": "Geeks way of taking notes.",
-  "version": "1.0.2",
-  "web_accessible_resources": ["options/notes.html"],
+  "version": "1.1.0",
+  "web_accessible_resources": ["notes/notes.html"],
   "icons": {
       "19": "icons/notepad_19.png",
       "128":"icons/notepad_128.png",
@@ -15,10 +15,7 @@
         "storage",
         "tabs"
     ],
-  "background": {
-        "persistent": true,
-        "scripts": ["background.js"]
-    },
+  
   "content_scripts": [
     {
       "matches": ["http://codeforces.com//*","http://codeforces.com/*","http://www.geeksforgeeks.org/*","https://www.geeksforgeeks.org/*"],

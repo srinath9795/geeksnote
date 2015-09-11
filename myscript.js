@@ -65,7 +65,7 @@ window.onload = function(){
     title.style.lineHeight = "0";
 
     var a = document.createElement('a');
-    a.setAttribute('href',"chrome-extension://"+chrome.runtime.id+"/options/notes.html");
+    a.setAttribute('href',"chrome-extension://"+chrome.runtime.id+"/notes/notes.html");
     a.innerHTML = "All Notes";
     a.style.display = "inline";
     a.style.float = "right";
@@ -228,7 +228,7 @@ window.onload = function(){
     title.style.fontSize = "14px";
 
     var a = document.createElement('a');
-    a.setAttribute('href',"chrome-extension://"+chrome.runtime.id+"/options/notes.html");
+    a.setAttribute('href',"chrome-extension://"+chrome.runtime.id+"/notes/notes.html");
     a.innerHTML = "All Notes";
     a.style.display = "inline";
     a.style.float = "right";

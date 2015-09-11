@@ -29,7 +29,7 @@
 			  <td ng-repeat = "(key, value) in obj" style="padding-bottom: 15px">
 			  	<div ng-if="value" style="background-color: #ffffcc;min-width:200px;max-width:300px;position:relative;height:auto;min-height:100px;margin-right:50px;padding:10px">
 			  		<p>{{value}}</p>
-			  		<a ng-href="http://codeforces.com/problemset/problem/{{key}}" style="position:absolute;bottom:5px;font-size:12px;width:auto">{{key.substring(0,50)}}</a>
+			  		<a ng-href="http://codeforces.com{{key}}" style="position:absolute;bottom:5px;font-size:12px;width:auto">{{key.substring(0,50)}}</a>
 			  	</div>
 			  </td>
 			</tr>
