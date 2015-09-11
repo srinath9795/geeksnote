@@ -24,13 +24,13 @@ window.onload = function(){
     page = "notes";
     
   }
-  else if(mainUrl.indexOf("codeforces.com/problemset/problem/") > -1)
+  else if(mainUrl.indexOf("codeforces.com") > -1)
   {
-    subUrl = mainUrl.split("codeforces.com/problemset/problem/")[1];
+    subUrl = mainUrl.split("codeforces.com")[1];
     page = "notesCF"
 
   }
-
+  // console.log(page);
 
   chrome.storage.sync.get(page, function (obj) {
     notesObj=obj[page];
@@ -82,7 +82,7 @@ window.onload = function(){
     notesInput.type = "text";
     notesInput.style.resize="vertical"; 
     notesInput.style.width="100%"; 
-    notesInput.style.border="none"; 
+    // notesInput.style.border="none"; 
     notesInput.style.boxSizing="border-box"; 
     notesInput.style.backgroundColor="#ffffcc"; 
     notesInput.style.minHeight="150px"; 
