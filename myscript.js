@@ -38,7 +38,10 @@ window.onload = function(){
     if (typeof notesObj==='undefined') {  // This occurs when the extension is first used as nothing would be stored 
         notesObj={};
     };
-    addNotesDiv(page);
+    if (page === "notesCF")
+      addNotesDivCF(page);
+    else
+      addNotesDiv(page);
 
   });
 
@@ -62,7 +65,6 @@ window.onload = function(){
     title.style.lineHeight = "0";
 
     var a = document.createElement('a');
-    // console.log(chrome.runtime.id);
     a.setAttribute('href',"chrome-extension://"+chrome.runtime.id+"/options/notes.html");
     a.innerHTML = "All Notes";
     a.style.display = "inline";
@@ -110,26 +112,18 @@ window.onload = function(){
         chrome.storage.sync.set(savingObj, function() {
             // console.log('saved',objName,notesObj);          
         }); 
-        // console.log(subUrl);
     }
 
     var div = document.createElement("div");
     div.setAttribute("id","text-notes");
-    if (page==="notesCF") {
-      div.className = "roundbox sidebox";
-    }
-    else
-      div.className = "widget widget_text";
+    div.className = "widget widget_text";
     
     div.appendChild(notesHeader);
     div.appendChild(notesInput);
 
-    if (page==="notesCF") {
-      var secondary = document.getElementById('sidebar');
-    }
-    else
-      var secondary = document.getElementById('secondary');
-    secondary.insertBefore(div, secondary.firstChild);
+    var secondary = document.getElementById('secondary');
+    if (secondary != null)
+      secondary.insertBefore(div, secondary.firstChild);
 
 
 
@@ -149,5 +143,112 @@ window.onload = function(){
 
   }
 
+
+
+
+  var addNotesDivCF = function(page)
+  {
+    
+    
+    // asid > ( (notesHeader > (Title+a) ) + notesInput)
+    var notesInput = document.createElement('textarea');
+
+    
+
+    notesInput.setAttribute("id","notes-box");
+    if(subUrl in notesObj)
+    {
+      notesInput.value = notesObj[subUrl];
+    }
+    notesInput.type = "text";
+    notesInput.style.resize="vertical"; 
+    notesInput.style.width="100%"; 
+    notesInput.style.border="none"; 
+    notesInput.style.outline="none"; 
+    notesInput.style.boxShadow="none"; 
+    notesInput.style.boxSizing="border-box"; 
+    notesInput.style.backgroundColor="#ffffcc"; 
+    notesInput.style.minHeight="150px"; 
+    notesInput.style.fontSize="13px"; 
+    notesInput.style.padding="5px"; 
+    notesInput.style.color="#606060"; 
+    notesInput.style.fontFamily="'Source Code Pro', Consolas,  Menlo, Courier, monospace !important"; 
+    var t;
+    notesInput.oninput = function() {
+      notesInput.style.height = ""; 
+      notesInput.style.height = Math.max(notesInput.scrollHeight,150)+ "px";
+      if ( t )
+      {
+        clearTimeout( t );
+        t = setTimeout( syncNotes, 2000 );
+      }
+      else
+      {
+        t = setTimeout( syncNotes, 2000 );
+      }
+    };
+    function syncNotes()
+    {
+        notesObj[subUrl] = document.getElementById('notes-box').value;
+        var objName = page;
+        var savingObj = {};
+        savingObj[objName] = notesObj;
+        chrome.storage.sync.set(savingObj, function() {
+            // console.log('saved',objName,notesObj);          
+        }); 
+    }
+
+    var div = document.createElement("div");
+    div.setAttribute("id","text-notes");
+    
+    div.className = "roundbox sidebox";
+    var div1 = document.createElement("div");
+    div1.className = "roundbox-lt";
+    div1.innerHTML = "&nbsp;"
+    div.appendChild(div1);
+    var div2 = document.createElement("div");
+    div2.className = "roundbox-rt";
+    div2.innerHTML = "&nbsp;"
+    div.appendChild(div2);
+    
+  
+
+    var notesHeader = document.createElement('div');
+    notesHeader.className = "titled";
+    notesHeader.style.padding = "5px";
+    var title = document.createElement('h2');
+    // notesHeader.style.paddingBottom = "5px";
+
+    title.innerHTML = "geeksNote";
+    title.className = "caption";
+    title.style.display = "inline";
+    title.style.lineHeight = "0";
+    title.style.paddingLeft = "5px";
+    title.style.border = "0";
+    title.style.fontSize = "14px";
+
+    var a = document.createElement('a');
+    a.setAttribute('href',"chrome-extension://"+chrome.runtime.id+"/options/notes.html");
+    a.innerHTML = "All Notes";
+    a.style.display = "inline";
+    a.style.float = "right";
+    a.style.fontSize = "10px";
+    a.style.paddingBottom = "0";
+    a.style.paddingTop = "5px";
+    a.target = "_blank";
+    notesHeader.appendChild(title);
+    notesHeader.appendChild(a);
+    div.appendChild(notesHeader);
+    div.appendChild(notesInput);
+
+      
+
+    
+    var secondary = document.getElementById('sidebar');
+    if (secondary != null)
+      secondary.insertBefore(div, secondary.firstChild);
+
+
+  }
 
 }
