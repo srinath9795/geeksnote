@@ -6,17 +6,18 @@ window.onload = function(){
   var notesObj = {};
   var subUrl = "";
   var page = "";
-  //   chrome.storage.sync.get(null, function(items) {
-  //     var allKeys = Object.keys(items);
-  //     console.log('shit',allKeys,items);
-  // });
-
 
   // Add one more if, if you want to extend this to a new website
   // also give that domain a new name
+
   // doamins right now
-  // notes    --  geeksforgeeks.org
+  
+  // notes    --  geeksforgeeks.org  -- 
+  // The reason I'm not changing this to notesGFG is because those users who have installed before the 2nd release would have their data for this name...
+  // Now changing this would lead to loss of that data
+  
   // notesCF  --  codeforces.com
+
   var mainUrl = window.location.href ;
   if(mainUrl.indexOf("www.geeksforgeeks.org") > -1)
   {
@@ -28,9 +29,7 @@ window.onload = function(){
   {
     subUrl = mainUrl.split("codeforces.com")[1];
     page = "notesCF"
-
   }
-  // console.log(page);
 
   chrome.storage.sync.get(page, function (obj) {
     notesObj=obj[page];
@@ -40,19 +39,21 @@ window.onload = function(){
     };
     if (page === "notesCF")
       addNotesDivCF(page);
-    else
+    else if (page === "notes")
       addNotesDiv(page);
 
   });
 
 
-
+  // Tried writing one single function for both the pages
+  // but it needed a lot of if else for perfect design of the notes which matches the page
 
   var addNotesDiv = function(page)
   {
     
-    
-    // asid > ( (notesHeader > (Title+a) ) + notesInput)
+    // DOM structure :
+    // div > ( (notesHeader > (Title+a) ) + notesInput)
+    // code for the design of the geeky note for GFG    
     var notesHeader = document.createElement('div');
     var notesInput = document.createElement('textarea');
     var title = document.createElement('h2');
@@ -82,7 +83,6 @@ window.onload = function(){
     notesInput.type = "text";
     notesInput.style.resize="vertical"; 
     notesInput.style.width="100%"; 
-    // notesInput.style.border="none"; 
     notesInput.style.boxSizing="border-box"; 
     notesInput.style.backgroundColor="#ffffcc"; 
     notesInput.style.minHeight="150px"; 
@@ -96,7 +96,7 @@ window.onload = function(){
       if ( t )
       {
         clearTimeout( t );
-        t = setTimeout( syncNotes, 2000 );
+        t = setTimeout( syncNotes, 2000 ); // syncs the text after a time gap of 2sec from last edit
       }
       else
       {
@@ -126,21 +126,6 @@ window.onload = function(){
       secondary.insertBefore(div, secondary.firstChild);
 
 
-
-    // var header = document.getElementById('menu-top');
-    // var allNotesLink = document.createElement('li');
-    // allNotesLink.setAttribute("id","menu-item-notes");
-    // allNotesLink.className = "menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135017";
-
-    // var a = document.createElement('a');
-    // a.setAttribute('href',"chrome-extension://jcglgpokmhfaggmfmeodcgoedaikfpbb/options/notes.html");
-    // a.innerHTML = "All Notes";
-    // allNotesLink.appendChild(a);
-    // header.appendChild(allNotesLink);
-
-
-    // secondary.appendChild(notesInput);
-
   }
 
 
@@ -150,7 +135,6 @@ window.onload = function(){
   {
     
     
-    // asid > ( (notesHeader > (Title+a) ) + notesInput)
     var notesInput = document.createElement('textarea');
 
     

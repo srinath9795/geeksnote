@@ -2,22 +2,32 @@
 
 angular.module('geeksNote',[]).controller('parentController', ['$scope',
 function($scope){
+	chrome.storage.sync.get(null, function(items) {
+		var allKeys = Object.keys(items);
+		console.log(allKeys);
+		
+		// Using presentKeys now for development as there are redundant keys in my allKeys
+		// the following code is generic and we just need to add new domainName to the presentKeys array
+		var presentKeys = ["notes","notesCF"];
 
-		chrome.storage.sync.get("notes", function (obj) {
-		    $scope.notesObj=obj.notes;
+		for( var i in presentKeys)
+		{
+			console.log(i);
+		}
+
+		for (var i=0; i<presentKeys.length; i++) {
+			$scope[presentKeys[i]]=items[presentKeys[i]];
 		    
-		    if (typeof $scope.notesObj==='undefined') {  // This occurs when the extension is first used as nothing would be stored 
-		        $scope.notesObj={};
+		    if (typeof $scope[presentKeys[i]]==='undefined') {  // This occurs when the extension is first used as nothing would be stored 
+		        $scope[presentKeys[i]]={};
 		    };
 			$scope.$apply(function() {
 
-		        console.log("Disk cache hit");
-		        // console.log(value.receiptList);
-		        var p= obj.notes;
+		        var p= items[presentKeys[i]];
 		        var count=0;
 		        var newObj = {};
 
-		        $scope.notesObj = [];
+		        $scope[presentKeys[i]] = [];
 		        for (var key in p) {
 				  if (p.hasOwnProperty(key)) {
 				    if(!p[key]) continue;
@@ -25,7 +35,7 @@ function($scope){
 				    newObj[key]=p[key];
 				    if (count==3)
 				    {
-				    	$scope.notesObj.push(newObj);
+				    	$scope[presentKeys[i]].push(newObj);
 				    	newObj={};
 				    	count=0;
 				    }
@@ -34,52 +44,14 @@ function($scope){
 				}
 				if (count!=0)
 				{
-				    $scope.notesObj.push(newObj);
+				    $scope[presentKeys[i]].push(newObj);
 
 				}
 
 		    });
-		});
+		}
 
-
-
-		chrome.storage.sync.get("notesCF", function (obj) {
-		    $scope.notesObj1=obj.notesCF;
-		    
-		    if (typeof $scope.notesObj1==='undefined') {  // This occurs when the extension is first used as nothing would be stored 
-		        $scope.notesObj1={};
-		    };
-			$scope.$apply(function() {
-
-		        console.log("Disk cache hit");
-		        // console.log(value.receiptList);
-		        var p= obj.notesCF;
-		        var count=0;
-		        var newObj = {};
-
-		        $scope.notesObj1 = [];
-		        for (var key in p) {
-				  if (p.hasOwnProperty(key)) {
-				    if(!p[key]) continue;
-				    count++;
-				    newObj[key]=p[key];
-				    if (count==3)
-				    {
-				    	$scope.notesObj1.push(newObj);
-				    	newObj={};
-				    	count=0;
-				    }
-
-				  }
-				}
-				if (count!=0)
-				{
-				    $scope.notesObj1.push(newObj);
-
-				}
-
-		    });
-		});
+	});
 
 
 }]);
